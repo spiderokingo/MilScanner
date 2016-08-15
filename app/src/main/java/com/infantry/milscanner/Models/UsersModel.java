@@ -9,6 +9,8 @@ public class UsersModel extends BaseModel{
     public String FirstName;
     public String LastName;
     public String MilitaryID;
+    public String PersonalID;
+    public String IdentityID;
     public String Permission;
     public String Username;
     public String Position;

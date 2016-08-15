@@ -19,6 +19,7 @@ public enum Enum {
     MODE_LOGIN("LOGIN"),
     MODE_USER("USER"),
     MODE_WEAPON("WEAPON"),
+    MODE_WITHDRAW("WITHDRAW"),
 
     API_PATH("192.168.1.254"),
 

@@ -80,7 +80,7 @@ public class ScanActivity extends AppCompatActivity {
         }
     }
 
-    public void getQrDetailsFromServer(String text) {
+    public void getQrDetailsFromServer(final String text) {
         switch (withdrawFragment.scanState){
             case "USER":
                 ApiService.getApiEndpointInterface().getQRDetails(Enum.MODE_USER.getStringValue(), text, new MyCallback<UsersModel>() {
@@ -88,6 +88,7 @@ public class ScanActivity extends AppCompatActivity {
                     public void good(UsersModel model) {
                         if(model != null){
                             if(model.result) {
+                                model.IdentityID = text;
                                 withdrawFragment.showPersonUI(model);
                                 withdrawFragment.scanState = Enum.MODE_WEAPON.getStringValue();
                             }else{

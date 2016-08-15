@@ -1,6 +1,7 @@
 package com.infantry.milscanner.Config;
 
 
+import com.infantry.milscanner.Models.BaseModel;
 import com.infantry.milscanner.Models.UsersModel;
 import com.infantry.milscanner.Models.WeaponModel;
 import com.infantry.milscanner.Utils.ModelCaches;
@@ -62,5 +63,13 @@ public class ApiService {
         @FormUrlEncoded
         @POST("/getQR.php")
         void getQRWeaponDetails(@Field("Mode") String mode,@Field("WeaponNumber") String WeaponNumber, MyCallback<WeaponModel> cb);
+
+        @FormUrlEncoded
+        @POST("/getQR.php")
+        void submitWithdraw(@Field("Mode") String mode,
+                            @Field("PersonalID") String PersonalID,
+                            @Field("IdentityID") String IdentityID,
+                            @Field("WeaponID") String WeaponID,
+                            @Field("WeaponNumber") String WeaponNumber, MyCallback<BaseModel> cb);
     }
 }

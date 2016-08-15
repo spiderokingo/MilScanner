@@ -49,6 +49,7 @@
                 android:id="@+id/tvCompany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 />
             <View
                 android:layout_width="match_parent"
@@ -126,6 +127,7 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="5dp"
                 />
             <TextView
@@ -141,6 +143,8 @@
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
         android:text="SUBMIT"
         android:visibility="gone"
         android:layout_alignParentBottom="true"/>

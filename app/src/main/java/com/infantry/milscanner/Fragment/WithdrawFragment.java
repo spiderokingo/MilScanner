@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +26,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.infantry.milscanner.Activity.ScanActivity;
 import com.infantry.milscanner.Config.ApiService;
+import com.infantry.milscanner.Models.BaseModel;
 import com.infantry.milscanner.Models.UsersModel;
 import com.infantry.milscanner.Models.WeaponModel;
 import com.infantry.milscanner.R;
@@ -74,6 +76,8 @@ public class WithdrawFragment extends Fragment {
     Button btnSubmit;
 
     public String scanState = "USER";
+    UsersModel usersModel = new UsersModel();
+    WeaponModel weaponModel = new WeaponModel();
 
     public WithdrawFragment() {
         // Required empty public constructor
@@ -147,18 +151,47 @@ public class WithdrawFragment extends Fragment {
                     scanState = Enum.MODE_USER.getStringValue();
                     etUserCode.setHint("ใส่เลขบัตรประชาชน");
                     etUserCode.setText("");
-                    holdPerson.setVisibility(View.GONE);
                     holdScanInput.setVisibility(View.VISIBLE);
+                    holdPerson.setVisibility(View.GONE);
+                    btnSubmit.setVisibility(View.GONE);
                     break;
                 case R.id.btnRefreshWeapon:
-                    holdWeapon.setVisibility(View.GONE);
                     holdScanInput.setVisibility(View.VISIBLE);
+                    holdWeapon.setVisibility(View.GONE);
+                    btnSubmit.setVisibility(View.GONE);
                     break;
                 case R.id.btnSubmit:
+                    submitWithdrawToServer();
                     break;
             }
         }
     };
+
+    private void submitWithdrawToServer() {
+        ApiService.getApiEndpointInterface().submitWithdraw(
+                Enum.MODE_WITHDRAW.getStringValue(),
+                usersModel.PersonalID, usersModel.IdentityID,
+                weaponModel.WeaponID, weaponModel.WeaponNumber,
+                new MyCallback<BaseModel>() {
+                    @Override
+                    public void good(BaseModel model) {
+                        if(model != null){
+                            if(model.result){
+                                btnSubmit.setVisibility(View.GONE);
+                                holdPerson.setVisibility(View.GONE);
+                                holdWeapon.setVisibility(View.GONE);
+                                holdScanInput.setVisibility(View.VISIBLE);
+                                scanState = Enum.MODE_USER.getStringValue();
+                                etUserCode.setHint("ใส่เลขบัตรประชาชน");
+                                etUserCode.setText("");
+                            }
+                            Singleton.toast(getContext(), model.message, Toast.LENGTH_LONG);
+                        }
+                    }
+                }
+
+        );
+    }
 
     public void showPersonUI(UsersModel model){
         etUserCode.setHint("ใส่หมายเลขอาวุธ");
@@ -170,6 +203,8 @@ public class WithdrawFragment extends Fragment {
         tvFullName.setText(name);
         tvCompany.setText(company);
 
+        usersModel = model;
+
         if(holdWeapon.getVisibility() == View.VISIBLE){
             holdScanInput.setVisibility(View.GONE);
         }
@@ -179,11 +214,15 @@ public class WithdrawFragment extends Fragment {
     public void showWeaponUI(WeaponModel model) {
         holdScanInput.setVisibility(View.GONE);
         holdWeapon.setVisibility(View.VISIBLE);
+        etUserCode.setText("");
         String type = model.WeaponType + " (" + model.WeaponCompany + ")";
         String number = "หมายเลขอาวุธ: " + model.WeaponNumber;
         Glide.with(getContext()).load(ModelCaches.getInstance().getApiCompletePath() + model.ImageFullPath).into(ivWeapon);
         tvWpType.setText(type);
         tvWpNo.setText(number);
+
+        weaponModel = model;
+
         checkComplete();
     }
 
@@ -197,6 +236,22 @@ public class WithdrawFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                getActivity().finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
