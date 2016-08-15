@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MilScanner</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TEXT -->
+
+    <!-- HINT -->
+    <string name="hint.username">Username</string>
+    <string name="hint.password">Password</string>
+
+    <!-- BUTTON -->
+    <string name="text.btn.login">Log In</string>
+</resources>
