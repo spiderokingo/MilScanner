@@ -2,6 +2,7 @@ package com.infantry.milscanner.Config;
 
 
 import com.infantry.milscanner.Models.UsersModel;
+import com.infantry.milscanner.Models.WeaponModel;
 import com.infantry.milscanner.Utils.ModelCaches;
 import com.infantry.milscanner.Utils.MyCallback;
 
@@ -27,7 +28,7 @@ public class ApiService {
         RestAdapter.Builder builderAdapter;
         builderAdapter = new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.BASIC);
 
-        builderAdapter.setEndpoint("http://" + ModelCaches.getInstance().getApiPath() + "/db/php");
+        builderAdapter.setEndpoint(ModelCaches.getInstance().getApiCompletePath() + "php");
 
         apiEndpointInterface = builderAdapter.build().create(apiEndpointInterface.class);
 
@@ -53,5 +54,13 @@ public class ApiService {
         @FormUrlEncoded
         @POST("/loginValidate.php")
         void apiCheck(@Field("Username") String username,Callback<UsersModel> cb);
+
+        @FormUrlEncoded
+        @POST("/getQR.php")
+        void getQRDetails(@Field("Mode") String mode,@Field("IdentityID") String identityId, MyCallback<UsersModel> cb);
+
+        @FormUrlEncoded
+        @POST("/getQR.php")
+        void getQRWeaponDetails(@Field("Mode") String mode,@Field("WeaponNumber") String WeaponNumber, MyCallback<WeaponModel> cb);
     }
 }

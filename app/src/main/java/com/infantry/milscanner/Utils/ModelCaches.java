@@ -31,6 +31,10 @@ public class ModelCaches {
         );
     }
 
+    public String getApiCompletePath(){
+        return "http://" + ModelCaches.getInstance().getApiPath() + "/db/";
+    }
+
     public void clearModelOnLogout(){
         setUsersDetails(new UsersModel());
     }

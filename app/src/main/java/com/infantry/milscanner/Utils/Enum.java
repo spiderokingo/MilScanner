@@ -17,6 +17,8 @@ public enum Enum {
      * MODE
      */
     MODE_LOGIN("LOGIN"),
+    MODE_USER("USER"),
+    MODE_WEAPON("WEAPON"),
 
     API_PATH("192.168.1.254"),
 
