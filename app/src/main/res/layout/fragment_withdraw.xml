@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
-        android:text="SUBMIT"
+        android:text="บันทึก"
         android:visibility="gone"
         android:layout_alignParentBottom="true"/>
 

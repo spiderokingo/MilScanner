@@ -22,7 +22,7 @@
             <EditText
                 android:id="@+id/et_login_username"
                 android:layout_width="250dp"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:hint="@string/hint.username"
                 android:layout_below="@+id/login_header_logo"
@@ -31,7 +31,7 @@
             <EditText
                 android:id="@+id/et_login_password"
                 android:layout_width="250dp"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:hint="@string/hint.password"
                 android:inputType="textPassword"

@@ -50,8 +50,8 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
 
-        String[] values = new String[] { "Weapons", "Equipments", "Vehicles",
-                "Materials" };
+        String[] values = new String[] { "อาวุธ", "เครื่องมือสื่อสาร",
+                "เครื่องสนาม" };
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
@@ -74,17 +74,12 @@ public class MainFragment extends Fragment {
                         startActivity(new Intent(getContext(), ScanActivity.class));
                         break;
                     case 1:
-                        Singleton.toast(getContext(), "Equipments", Toast.LENGTH_SHORT);
+                        Singleton.toast(getContext(), "เครื่องมือสื่อสาร", Toast.LENGTH_SHORT);
                         break;
                     case 2:
-                        Singleton.toast(getContext(), "Vehicles", Toast.LENGTH_SHORT);
-                        break;
-                    case 3:
-                        Singleton.toast(getContext(), "Materials", Toast.LENGTH_SHORT);
+                        Singleton.toast(getContext(), "เครื่องสนาม", Toast.LENGTH_SHORT);
                         break;
                 }
-                Timber.d("item: " + item);
-                Timber.d("position: " + position);
             }
 
         });

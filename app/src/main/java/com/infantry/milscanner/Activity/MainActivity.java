@@ -84,15 +84,19 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withName(MENU_SETTING.getStringValue()).withIdentifier(NAV_SETTING);
         PrimaryDrawerItem item5 = new PrimaryDrawerItem().withName(MENU_LOGOUT.getStringValue()).withIdentifier(NAV_LOGOUT);
 
+        Timber.d(ModelCaches.getInstance().getApiCompletePath() + ModelCaches.getInstance().getUsersDetails().ImageFullPath);
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withSelectionListEnabled(false)
                 .withHeaderBackground(R.drawable.nav_header)
                 .addProfiles(new ProfileDrawerItem()
-                        .withName(ModelCaches.getInstance().getUsersDetails().TitleName
-                                + " " + ModelCaches.getInstance().getUsersDetails().FirstName
-                                + " " + ModelCaches.getInstance().getUsersDetails().LastName)
-                        .withEmail(ModelCaches.getInstance().getUsersDetails().Permission))
+                                .withName(ModelCaches.getInstance().getUsersDetails().TitleName
+                                        + " " + ModelCaches.getInstance().getUsersDetails().FirstName
+                                        + " " + ModelCaches.getInstance().getUsersDetails().LastName)
+                                .withEmail(ModelCaches.getInstance().getUsersDetails().Permission)
+                                .withIcon(ModelCaches.getInstance().getApiCompletePath() + ModelCaches.getInstance().getUsersDetails().ImageFullPath)
+                )
+
                 .build();
 
         drawer = new DrawerBuilder()

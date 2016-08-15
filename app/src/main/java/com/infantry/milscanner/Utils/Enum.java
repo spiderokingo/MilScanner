@@ -34,8 +34,8 @@ public enum Enum {
      * TITLE
      */
     TITLE_CONFIRM_LOGOUT("Logout Confirmation"),
-    TITLE_TAB_WITHDRAW("Withdraw"),
-    TITLE_TAB_DEPOSIT("Deposit"),
+    TITLE_TAB_WITHDRAW("การเบิก"),
+    TITLE_TAB_DEPOSIT("การถอน"),
 
 
     /**
