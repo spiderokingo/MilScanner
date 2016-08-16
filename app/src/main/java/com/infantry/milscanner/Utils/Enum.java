@@ -46,6 +46,8 @@ public enum Enum {
     CANCEL("Cancel"),
     TEXT_SCAN_PERSON("แสกนบัตรทหารเพื่อแสดงตน"),
     TEXT_SCAN_WEAPON("แสกนบาโค้ดของอาวุธ"),
+    TEXT_KEY_WEAPON_NUMBER("ใส่หมายเลขอาวุธ"),
+    TEXT_KEY_IDENTITY_ID("ใส่เลขบัตรประชาชน"),
 
 
     ;

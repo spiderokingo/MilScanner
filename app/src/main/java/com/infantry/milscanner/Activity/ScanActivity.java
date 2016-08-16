@@ -31,7 +31,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 
 public class ScanActivity extends AppCompatActivity {
@@ -74,7 +73,10 @@ public class ScanActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() != null) {
-                getQrDetailsFromServer(result.getContents());
+                if(tabs.getSelectedTabPosition() == 0)
+                    getQrDetailsFromServer(result.getContents());
+                else
+                    getDepositDetails(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -106,6 +108,41 @@ public class ScanActivity extends AppCompatActivity {
                         if (model != null) {
                             if (model.result) {
                                 withdrawFragment.showWeaponUI(model);
+                            } else {
+                                Singleton.toast(getApplicationContext(), model.message, Toast.LENGTH_LONG);
+                            }
+                        }
+                    }
+                });
+                break;
+        }
+    }
+
+    public void getDepositDetails(final String text) {
+        switch (depositFragment.scanState){
+            case "WEAPON":
+                ApiService.getApiEndpointInterface().getDepositWeapon(Enum.MODE_WEAPON.getStringValue(), text, new MyCallback<WeaponModel>() {
+                    @Override
+                    public void good(WeaponModel model) {
+                        if (model != null) {
+                            if (model.result) {
+                                depositFragment.showWeaponUI(model);
+                                depositFragment.scanState = Enum.MODE_USER.getStringValue();
+                            } else {
+                                Singleton.toast(getApplicationContext(), model.message, Toast.LENGTH_LONG);
+                            }
+                        }
+                    }
+                });
+                break;
+            case "USER":
+                ApiService.getApiEndpointInterface().getQRDetails(Enum.MODE_USER.getStringValue(), text, new MyCallback<UsersModel>() {
+                    @Override
+                    public void good(UsersModel model) {
+                        if (model != null) {
+                            if (model.result) {
+                                model.IdentityID = text;
+                                depositFragment.showPersonUI(model);
                             } else {
                                 Singleton.toast(getApplicationContext(), model.message, Toast.LENGTH_LONG);
                             }

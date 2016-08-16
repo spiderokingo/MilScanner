@@ -1,14 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Deposit"
-        android:id="@+id/textView"
-        android:layout_centerInParent="true"/>
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/holdWeapon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/ivWeapon"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitCenter"
+                    />
+                <ImageButton
+                    android:id="@+id/btnRefreshWeapon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_refresh_black_24dp"
+                    android:background="@null"
+                    android:layout_toRightOf="@+id/ivWeapon"
+                    android:layout_toEndOf="@+id/ivWeapon"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvWpNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:id="@+id/tvWpType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/colorPrimary"
+                android:alpha="0.4"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/holdScanInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="ใส่หมายเลขอาวุธ"
+                android:singleLine="true"
+                android:id="@+id/etUserCode"/>
+
+            <ImageButton
+                android:id="@+id/btnEnterQr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_enter"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
+
+            <ImageButton
+                android:id="@+id/btnQrCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/ic_qr_code"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/holdPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/ivPerson"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/round_img"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp" />
+                <ImageButton
+                    android:id="@+id/btnRefreshPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_refresh_black_24dp"
+                    android:background="@null"
+                    android:layout_toRightOf="@+id/ivPerson"
+                    android:layout_toEndOf="@+id/ivPerson"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/holdSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:text="ยกเลิก"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:text="บันทึก"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </RelativeLayout>

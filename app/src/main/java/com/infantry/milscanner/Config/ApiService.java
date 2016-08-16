@@ -65,11 +65,16 @@ public class ApiService {
         void getQRWeaponDetails(@Field("Mode") String mode,@Field("WeaponNumber") String WeaponNumber, MyCallback<WeaponModel> cb);
 
         @FormUrlEncoded
+        @POST("/getDepositDetails.php")
+        void getDepositWeapon(@Field("Mode") String mode,@Field("WeaponNumber") String WeaponNumber, MyCallback<WeaponModel> cb);
+
+        @FormUrlEncoded
         @POST("/getQR.php")
         void submitWithdraw(@Field("Mode") String mode,
                             @Field("PersonalID") String PersonalID,
                             @Field("IdentityID") String IdentityID,
                             @Field("WeaponID") String WeaponID,
                             @Field("WeaponNumber") String WeaponNumber, MyCallback<BaseModel> cb);
+
     }
 }

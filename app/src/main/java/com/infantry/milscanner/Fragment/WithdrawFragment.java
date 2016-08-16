@@ -75,7 +75,7 @@ public class WithdrawFragment extends Fragment {
     @Bind(R.id.btnSubmit)
     Button btnSubmit;
 
-    public String scanState = "USER";
+    public String scanState = Enum.MODE_USER.getStringValue();
     UsersModel usersModel = new UsersModel();
     WeaponModel weaponModel = new WeaponModel();
 
@@ -149,7 +149,7 @@ public class WithdrawFragment extends Fragment {
                     break;
                 case R.id.btnRefreshPerson:
                     scanState = Enum.MODE_USER.getStringValue();
-                    etUserCode.setHint("ใส่เลขบัตรประชาชน");
+                    etUserCode.setHint(Enum.TEXT_KEY_IDENTITY_ID.getStringValue());
                     etUserCode.setText("");
                     holdScanInput.setVisibility(View.VISIBLE);
                     holdPerson.setVisibility(View.GONE);
@@ -175,14 +175,14 @@ public class WithdrawFragment extends Fragment {
                 new MyCallback<BaseModel>() {
                     @Override
                     public void good(BaseModel model) {
-                        if(model != null){
-                            if(model.result){
+                        if (model != null) {
+                            if (model.result) {
                                 btnSubmit.setVisibility(View.GONE);
                                 holdPerson.setVisibility(View.GONE);
                                 holdWeapon.setVisibility(View.GONE);
                                 holdScanInput.setVisibility(View.VISIBLE);
                                 scanState = Enum.MODE_USER.getStringValue();
-                                etUserCode.setHint("ใส่เลขบัตรประชาชน");
+                                etUserCode.setHint(Enum.TEXT_KEY_IDENTITY_ID.getStringValue());
                                 etUserCode.setText("");
                             }
                             Singleton.toast(getContext(), model.message, Toast.LENGTH_LONG);
@@ -194,7 +194,7 @@ public class WithdrawFragment extends Fragment {
     }
 
     public void showPersonUI(UsersModel model){
-        etUserCode.setHint("ใส่หมายเลขอาวุธ");
+        etUserCode.setHint(Enum.TEXT_KEY_WEAPON_NUMBER.getStringValue());
         etUserCode.setText("");
         holdPerson.setVisibility(View.VISIBLE);
         String name = model.TitleName + " " + model.FirstName + "  " + model.LastName;
