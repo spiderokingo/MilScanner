@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infantry.milscanner.Activity.LoginActivity;
@@ -52,6 +54,8 @@ public class Singleton {
             toast = null;
         }
         toast = Toast.makeText(context, message, length);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
         toast.show();
     }
 

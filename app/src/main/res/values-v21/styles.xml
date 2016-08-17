@@ -43,4 +43,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:actionMenuTextColor">@color/white</item>
     </style>
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">22sp</item>
+    </style>
 </resources>

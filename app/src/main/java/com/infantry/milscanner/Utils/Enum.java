@@ -20,6 +20,7 @@ public enum Enum {
     MODE_USER("USER"),
     MODE_WEAPON("WEAPON"),
     MODE_WITHDRAW("WITHDRAW"),
+    MODE_DEPOSIT("DEPOSIT"),
 
     API_PATH("192.168.1.254"),
 
@@ -33,17 +34,19 @@ public enum Enum {
     /**
      * TITLE
      */
-    TITLE_CONFIRM_LOGOUT("Logout Confirmation"),
-    TITLE_TAB_WITHDRAW("การเบิก"),
-    TITLE_TAB_DEPOSIT("การถอน"),
+    TITLE_CONFIRM_LOGOUT("ล็อคเอ้า ?"),
+    TITLE_WARNING_RETURN("คำเตือน"),
+    TITLE_TAB_WITHDRAW("เบิก"),
+    TITLE_TAB_DEPOSIT("ส่งคืน"),
 
 
     /**
      * TEXT
      */
-    CONTENT_CONFIRM_LOGOUT("Do you want to Logout ?"),
-    EXIT("Exit"),
-    CANCEL("Cancel"),
+    CONTENT_CONFIRM_LOGOUT("คุณมั่นใจว่าจะล็อคเอ้า ?"),
+    EXIT("ออก"),
+    OK("ตกลง"),
+    CANCEL("ยกเลิก"),
     TEXT_SCAN_PERSON("แสกนบัตรทหารเพื่อแสดงตน"),
     TEXT_SCAN_WEAPON("แสกนบาโค้ดของอาวุธ"),
     TEXT_KEY_WEAPON_NUMBER("ใส่หมายเลขอาวุธ"),

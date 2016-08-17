@@ -170,6 +170,7 @@ public class WithdrawFragment extends Fragment {
     private void submitWithdrawToServer() {
         ApiService.getApiEndpointInterface().submitWithdraw(
                 Enum.MODE_WITHDRAW.getStringValue(),
+                ModelCaches.getInstance().getUsersDetails().PersonalID,
                 usersModel.PersonalID, usersModel.IdentityID,
                 weaponModel.WeaponID, weaponModel.WeaponNumber,
                 new MyCallback<BaseModel>() {

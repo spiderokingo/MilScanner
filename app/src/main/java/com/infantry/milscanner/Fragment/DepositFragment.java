@@ -17,10 +17,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.GravityEnum;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.infantry.milscanner.Activity.ScanActivity;
+import com.infantry.milscanner.Config.ApiService;
+import com.infantry.milscanner.Models.BaseModel;
 import com.infantry.milscanner.Models.UsersModel;
 import com.infantry.milscanner.Models.WeaponModel;
 import com.infantry.milscanner.R;
@@ -72,8 +77,8 @@ public class DepositFragment extends Fragment {
     Button btnCancel;
 
     public String scanState = Enum.MODE_WEAPON.getStringValue();
-    UsersModel usersModel = new UsersModel();
-    WeaponModel weaponModel = new WeaponModel();
+    UsersModel usersModel;
+    WeaponModel weaponModel;
 
     public DepositFragment() {
         // Required empty public constructor
@@ -97,6 +102,7 @@ public class DepositFragment extends Fragment {
         btnRefreshWeapon.setOnClickListener(OnClickSetup);
         btnEnterQr.setOnClickListener(OnClickSetup);
         btnSubmit.setOnClickListener(OnClickSetup);
+        btnCancel.setOnClickListener(OnClickSetup);
     }
 
     private void setOnChangeListener() {
@@ -159,7 +165,7 @@ public class DepositFragment extends Fragment {
                     holdSubmit.setVisibility(View.GONE);
                     break;
                 case R.id.btnSubmit:
-//                    submitDepositToServer();
+                    submitDepositToServer();
                     break;
                 case R.id.btnCancel:
                     holdSubmit.setVisibility(View.GONE);
@@ -172,6 +178,34 @@ public class DepositFragment extends Fragment {
             }
         }
     };
+
+    private void submitDepositToServer() {
+        ApiService.getApiEndpointInterface().submitDeposit(
+                Enum.MODE_DEPOSIT.getStringValue(),
+                ModelCaches.getInstance().getUsersDetails().PersonalID,
+                usersModel.PersonalID,
+                weaponModel.WithdrawID,
+                weaponModel.WeaponID,
+                new MyCallback<BaseModel>() {
+                    @Override
+                    public void good(BaseModel model) {
+                        if (model != null) {
+                            if (model.result) {
+                                holdSubmit.setVisibility(View.GONE);
+                                holdPerson.setVisibility(View.GONE);
+                                holdWeapon.setVisibility(View.GONE);
+                                holdScanInput.setVisibility(View.VISIBLE);
+                                scanState = Enum.MODE_USER.getStringValue();
+                                etUserCode.setHint(Enum.TEXT_KEY_WEAPON_NUMBER.getStringValue());
+                                etUserCode.setText("");
+                            }
+                            Singleton.toast(getContext(), model.message, Toast.LENGTH_LONG);
+                        }
+                    }
+                }
+
+        );
+    }
 
     public void showPersonUI(UsersModel model){
         holdPerson.setVisibility(View.VISIBLE);
@@ -208,6 +242,21 @@ public class DepositFragment extends Fragment {
     private void checkComplete(){
         if(holdPerson.getVisibility() == View.VISIBLE && holdWeapon.getVisibility() == View.VISIBLE){
             holdSubmit.setVisibility(View.VISIBLE);
+        }
+
+        if(weaponModel != null && usersModel != null) {
+            if (!weaponModel.PersonalID.equalsIgnoreCase(usersModel.PersonalID)) {
+                MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                        .title(Enum.TITLE_WARNING_RETURN.getStringValue())
+                        .titleColor(getResources().getColor(R.color.red))
+                        .positiveText(Enum.OK.getStringValue())
+                        .positiveColor(getResources().getColor(R.color.colorPrimary))
+                        .content("อาวุธหมายนี้ถูกเบิกออกโดย\n" + weaponModel.PersonalName + "\nและจะส่งคืนโดย\n"
+                                + usersModel.TitleName + " " + usersModel.FirstName + "  " + usersModel.LastName )
+                        .contentGravity(GravityEnum.CENTER)
+                        .build();
+                dialog.show();
+            }
         }
     }
 

@@ -12,4 +12,7 @@ public class WeaponModel extends BaseModel{
     public String ImageFullPath;
     public String PersonalID;
     public String PersonalName;
+    public String WithdrawID;
+    public String WithdrawDetails;
+    public String WithdrawTime;
 }
