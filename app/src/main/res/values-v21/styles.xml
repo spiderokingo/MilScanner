@@ -20,6 +20,8 @@
 
         <!-- Navbar color-->
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+
+        <item name="android:textSize">@dimen/app_text_size</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -27,6 +29,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textSize">@dimen/app_text_size</item>
     </style>
 
     <style name="Toolbar">
@@ -42,6 +45,7 @@
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="android:textSize">50sp</item>
     </style>
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">22sp</item>

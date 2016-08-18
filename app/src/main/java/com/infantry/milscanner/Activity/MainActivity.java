@@ -37,6 +37,7 @@ import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static com.infantry.milscanner.Utils.Enum.*;
 
@@ -109,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withName(MENU_SETTING.getStringValue()).withIdentifier(NAV_SETTING);
         PrimaryDrawerItem item5 = new PrimaryDrawerItem().withName(MENU_LOGOUT.getStringValue()).withIdentifier(NAV_LOGOUT);
 
-        Timber.d(ModelCaches.getInstance().getApiCompletePath() + ModelCaches.getInstance().getUsersDetails().ImageFullPath);
         String imagePath = ModelCaches.getInstance().getApiCompletePath() + ModelCaches.getInstance().getUsersDetails().ImageFullPath;
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -185,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }

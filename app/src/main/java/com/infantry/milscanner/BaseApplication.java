@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.infantry.milscanner.Utils.Singleton;
 
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by MKinG on 1/26/2016.
@@ -22,6 +23,11 @@ public class BaseApplication extends Application implements Application.Activity
 
         //initial shared pref
         Singleton.getInstance().initSharedPrefs(this);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/THSarabun/THSarabun Bol.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
