@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:hint="@string/hint.username"
+                android:textSize="18sp"
                 android:layout_below="@+id/login_header_logo"
                 android:layout_marginTop="36dp" />
 
@@ -34,15 +35,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:hint="@string/hint.password"
+                android:textSize="18sp"
                 android:inputType="textPassword"
                 android:layout_below="@+id/et_login_username" />
 
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="280dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:hint="@string/text.btn.login"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="26dp"
                 android:layout_below="@+id/et_login_password" />
