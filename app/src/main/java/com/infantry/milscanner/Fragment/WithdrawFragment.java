@@ -140,7 +140,7 @@ public class WithdrawFragment extends Fragment {
                     break;
                 case R.id.btnQrCode:
                     IntentIntegrator integrator = new IntentIntegrator(getActivity());
-                    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                    integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
                     integrator.setPrompt(scanState.equals(Enum.MODE_USER.getStringValue())?
                             Enum.TEXT_SCAN_PERSON.getStringValue():
                             Enum.TEXT_SCAN_WEAPON.getStringValue());

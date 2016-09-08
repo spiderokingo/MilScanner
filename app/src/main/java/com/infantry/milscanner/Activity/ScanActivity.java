@@ -48,6 +48,9 @@ public class ScanActivity extends AppCompatActivity {
     WithdrawFragment withdrawFragment;
     DepositFragment depositFragment;
 
+    private final String User = "USER";
+    private final String Weapon = "WEAPON";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +78,11 @@ public class ScanActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() != null) {
-                if(tabs.getSelectedTabPosition() == 0)
-                    getQrDetailsFromServer(result.getContents());
-                else
-                    getDepositDetails(result.getContents());
+                Singleton.toast(getApplicationContext(),result.getContents(),Toast.LENGTH_LONG);
+//                if(tabs.getSelectedTabPosition() == 0)
+//                    getQrDetailsFromServer(result.getContents());
+//                else
+//                    getDepositDetails(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -87,7 +91,7 @@ public class ScanActivity extends AppCompatActivity {
 
     public void getQrDetailsFromServer(final String text) {
         switch (withdrawFragment.scanState){
-            case "USER":
+            case User:
                 ApiService.getApiEndpointInterface().getQRDetails(Enum.MODE_USER.getStringValue(), text, new MyCallback<UsersModel>() {
                     @Override
                     public void good(UsersModel model) {
@@ -103,7 +107,7 @@ public class ScanActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case "WEAPON":
+            case Weapon:
                 ApiService.getApiEndpointInterface().getQRWeaponDetails(Enum.MODE_WEAPON.getStringValue(), text, new MyCallback<WeaponModel>() {
                     @Override
                     public void good(WeaponModel model) {
@@ -122,7 +126,7 @@ public class ScanActivity extends AppCompatActivity {
 
     public void getDepositDetails(final String text) {
         switch (depositFragment.scanState){
-            case "WEAPON":
+            case Weapon:
                 ApiService.getApiEndpointInterface().getDepositWeapon(Enum.MODE_WEAPON.getStringValue(), text, new MyCallback<WeaponModel>() {
                     @Override
                     public void good(WeaponModel model) {
@@ -137,7 +141,7 @@ public class ScanActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case "USER":
+            case User:
                 ApiService.getApiEndpointInterface().getQRDetails(Enum.MODE_USER.getStringValue(), text, new MyCallback<UsersModel>() {
                     @Override
                     public void good(UsersModel model) {
