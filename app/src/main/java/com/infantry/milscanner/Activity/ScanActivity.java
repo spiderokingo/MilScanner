@@ -79,10 +79,10 @@ public class ScanActivity extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() != null) {
                 Singleton.toast(getApplicationContext(),result.getContents(),Toast.LENGTH_LONG);
-//                if(tabs.getSelectedTabPosition() == 0)
-//                    getQrDetailsFromServer(result.getContents());
-//                else
-//                    getDepositDetails(result.getContents());
+                if(tabs.getSelectedTabPosition() == 0)
+                    getQrDetailsFromServer(result.getContents());
+                else
+                    getDepositDetails(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
