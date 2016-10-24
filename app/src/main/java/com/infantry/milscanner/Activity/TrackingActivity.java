@@ -1,7 +1,6 @@
 package com.infantry.milscanner.Activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -9,17 +8,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.infantry.milscanner.Config.ApiService;
 import com.infantry.milscanner.Models.BaseModel;
-import com.infantry.milscanner.Models.UsersModel;
+import com.infantry.milscanner.Models.StringModel;
 import com.infantry.milscanner.R;
 import com.infantry.milscanner.Utils.Enum;
 import com.infantry.milscanner.Utils.GPSTracker;
@@ -27,12 +21,13 @@ import com.infantry.milscanner.Utils.ModelCaches;
 import com.infantry.milscanner.Utils.MyCallback;
 import com.infantry.milscanner.Utils.Singleton;
 import com.infantry.milscanner.ViewHolder.MainFragmentAdapter;
+import com.infantry.milscanner.ViewHolder.NoteViewHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -53,8 +48,8 @@ public class TrackingActivity extends AppCompatActivity {
     Runnable task;
     GPSTracker gpsTracker;
     Calendar now;
-    ArrayList<String> list;
-    MainFragmentAdapter adapter;
+    ArrayList<StringModel> list;
+    NoteViewHolder adapter;
 
 
     @Override
@@ -88,10 +83,9 @@ public class TrackingActivity extends AppCompatActivity {
         gpsTracker = new GPSTracker(this);
         now = Calendar.getInstance();
 
-        list = new ArrayList<String>();
+        list = new ArrayList<StringModel>();
 
-        adapter = new MainFragmentAdapter(TrackingActivity.this,
-                android.R.layout.simple_list_item_1, list);
+        adapter = new NoteViewHolder(this,R.layout.viewholder_tracking,list);
         listView.setAdapter(adapter);
     }
 
@@ -135,22 +129,36 @@ public class TrackingActivity extends AppCompatActivity {
                     @Override
                     public void good(BaseModel model) {
 
+                        Collections.reverse(list);
+                        StringModel temp = new StringModel();
                         if(model.result){
-                            list.add(new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date()) + ">Lat: " + gpsTracker.getLatitude() + ",Long: " + gpsTracker.getLongitude());
+                            temp.Mode = 1;
+                            temp.Status = new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date()) + ">Lat: " + gpsTracker.getLatitude() + ",Long: " + gpsTracker.getLongitude();
                         }else{
-                            list.add("FAILED");
+                            temp.Mode = 0;
+                            temp.Status = "FAILED";
                         }
-                        adapter = new MainFragmentAdapter(TrackingActivity.this,
-                                android.R.layout.simple_list_item_1, list);
+                        list.add(temp);
+                        Collections.reverse(list);
+                        adapter = new NoteViewHolder(TrackingActivity.this,R.layout.viewholder_tracking, list);
                         listView.setAdapter(adapter);
-                        worker.postDelayed(task, 10000);
+                        worker.postDelayed(task, 5000);
 
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         super.failure(error);
-                        Singleton.toast(TrackingActivity.this, "Internet Failed", Toast.LENGTH_SHORT );
+
+                        Collections.reverse(list);
+                        StringModel temp = new StringModel();
+                        temp.Mode = 0;
+                        temp.Status = "FAILED";
+
+                        list.add(temp);
+                        Collections.reverse(list);
+                        adapter = new NoteViewHolder(TrackingActivity.this,R.layout.viewholder_tracking, list);
+                        listView.setAdapter(adapter);
                         worker.postDelayed(task, 10000);
                     }
                 });
