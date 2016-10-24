@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.infantry.milscanner.Activity.MainActivity;
 import com.infantry.milscanner.Activity.ScanActivity;
+import com.infantry.milscanner.Activity.TrackingActivity;
 import com.infantry.milscanner.R;
 import com.infantry.milscanner.Utils.Singleton;
 import com.infantry.milscanner.ViewHolder.MainFragmentAdapter;
@@ -51,7 +52,7 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         String[] values = new String[] { "อาวุธ", "เครื่องมือสื่อสาร",
-                "เครื่องสนาม" };
+                "เครื่องสนาม", "GPS Tracking" };
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
@@ -78,6 +79,9 @@ public class MainFragment extends Fragment {
                         break;
                     case 2:
                         Singleton.toast(getContext(), "เครื่องสนาม", Toast.LENGTH_SHORT);
+                        break;
+                    case 3:
+                        startActivity(new Intent(getContext(), TrackingActivity.class));
                         break;
                 }
             }

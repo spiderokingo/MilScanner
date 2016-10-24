@@ -85,5 +85,13 @@ public class ApiService {
                            @Field("WithdrawID") String WithdrawPrimaryID,
                            @Field("WeaponID") String WeaponID, MyCallback<BaseModel> cb);
 
+        @FormUrlEncoded
+        @POST("/Tracking.php")
+        void trackingGPS(@Field("Mode") String mode,
+                           @Field("PersonalID") String PersonalID,
+                           @Field("DateTime") String DateTime,
+                           @Field("Position") String Position, MyCallback<BaseModel> cb);
+
+
     }
 }

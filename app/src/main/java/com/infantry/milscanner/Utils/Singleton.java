@@ -49,14 +49,18 @@ public class Singleton {
     }
 
     public static void toast(Context context, String message, int length) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
+        try {
+            if (toast != null) {
+                toast.cancel();
+                toast = null;
+            }
+            toast = Toast.makeText(context, message, length);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            if (v != null) v.setGravity(Gravity.CENTER);
+            toast.show();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        toast = Toast.makeText(context, message, length);
-        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-        if( v != null) v.setGravity(Gravity.CENTER);
-        toast.show();
     }
 
     public Context getCurrentContext() {
