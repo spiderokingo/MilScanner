@@ -142,7 +142,7 @@ public class TrackingActivity extends AppCompatActivity {
                         Collections.reverse(list);
                         adapter = new NoteViewHolder(TrackingActivity.this,R.layout.viewholder_tracking, list);
                         listView.setAdapter(adapter);
-                        worker.postDelayed(task, 5000);
+                        worker.postDelayed(task, 10000);
 
                     }
 
