@@ -23,7 +23,8 @@ public enum Enum {
     MODE_DEPOSIT("DEPOSIT"),
     MODE_INSERT("INSERT"),
 
-    API_PATH("192.168.1.254"),
+//    API_PATH("192.168.1.254"),
+    API_PATH(" infantry43.dyndns.org"),
 
     /**
      * MENU

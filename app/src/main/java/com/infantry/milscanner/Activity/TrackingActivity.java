@@ -60,12 +60,6 @@ public class TrackingActivity extends AppCompatActivity {
         initialize();
         timerSetup();
         setToolbar("Tracking");
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         isGPSTurnOn();
     }
 
@@ -87,10 +81,6 @@ public class TrackingActivity extends AppCompatActivity {
 
         adapter = new NoteViewHolder(this,R.layout.viewholder_tracking,list);
         listView.setAdapter(adapter);
-    }
-
-    private void refreshList(){
-
     }
 
     /**
@@ -128,6 +118,9 @@ public class TrackingActivity extends AppCompatActivity {
                 new MyCallback<BaseModel>() {
                     @Override
                     public void good(BaseModel model) {
+
+                        gpsTracker = new GPSTracker(TrackingActivity.this);
+
 
                         Collections.reverse(list);
                         StringModel temp = new StringModel();
