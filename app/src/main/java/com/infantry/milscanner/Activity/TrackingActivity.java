@@ -123,7 +123,7 @@ public class TrackingActivity extends AppCompatActivity {
     private void postTrackingApi() {
         ApiService.getApiEndpointInterface().trackingGPS(Enum.MODE_INSERT.getStringValue(),
                 ModelCaches.getInstance().getUsersDetails().PersonalID,
-                new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss", Locale.getDefault()).format(new Date()),
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()),
                 gpsTracker.getLatitude()+","+gpsTracker.getLongitude(),
                 new MyCallback<BaseModel>() {
                     @Override
