@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- TEXT -->
+    <string name="google.api.key">AIzaSyCb6y0MIepxB-kGzaKULLvt055zABJg8qk</string>
 
     <!-- HINT -->
     <string name="hint.username">Username</string>
